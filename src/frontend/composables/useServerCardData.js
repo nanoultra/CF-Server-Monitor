@@ -189,6 +189,13 @@ export function useServerCardData(props) {
     return 'var(--accent-red)'
   }
 
+  const pingList = computed(() => [
+    { label: 'CT', value: props.server.ping_ct },
+    { label: 'CU', value: props.server.ping_cu },
+    { label: 'CM', value: props.server.ping_cm },
+    { label: 'BD', value: props.server.ping_bd }
+  ])
+
   return {
     trans,
     currentTime,
@@ -220,6 +227,7 @@ export function useServerCardData(props) {
     roundedPercent,
     isPingValid,
     getPingColor,
+    pingList,
     getPublicAssetUrl,
     formatBytes
   }

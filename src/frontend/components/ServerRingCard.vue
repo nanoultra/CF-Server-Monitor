@@ -76,12 +76,18 @@
       </div>
       <div v-if="sysConfig.show_tf && trafficLimitSummary" class="server-card-limit-section">
         <div class="server-card-limit-header">
-          <span>SUM Limit</span>
+          <span>{{ trans.monthlyTraffic }}</span>
           <span>{{ trafficLimitText }} | {{ trafficLimitPercentText }}%</span>
         </div>
         <div class="server-card-limit-bar">
           <div class="server-card-limit-fill" :style="{ width: Math.min(100, trafficUsagePercent) + '%' }"></div>
         </div>
+      </div>
+      <div class="server-card-ping-row">
+        <span class="server-card-ping-chip" v-for="p in pingList" :key="p.label">
+          <span class="server-card-ping-label">{{ p.label }}</span>
+          <span class="server-card-ping-val" :style="{ color: getPingColor(p.value) }">{{ isPingValid(p.value) ? p.value + 'ms' : trans.timeout }}</span>
+        </span>
       </div>
     </div>
   </router-link>
@@ -127,6 +133,9 @@ const {
   diskUsageText,
   getRingStyle,
   roundedPercent,
+  isPingValid,
+  getPingColor,
+  pingList,
   getPublicAssetUrl
 } = useServerCardData(props)
 </script>

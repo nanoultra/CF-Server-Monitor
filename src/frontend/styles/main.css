@@ -1212,6 +1212,34 @@ body::before {
     transition: width 0.3s ease;
 }
 
+/* Ping row — ring card */
+.server-card-ping-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: space-between;
+}
+
+.server-card-ping-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.server-card-ping-label {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 11px;
+}
+
+.server-card-ping-val {
+    font-weight: 700;
+    font-size: 12px;
+}
+
 /* --------------------------------------------------------------------------
    13. Stat Bar Components
    -------------------------------------------------------------------------- */
