@@ -269,7 +269,7 @@ export default {
           turnstile_login_enabled: turnstileEnabled || turnstileLoginEnabled,
           turnstile_site_key: sys.turnstile_site_key || '',
           site_title: appearanceOptions.site_title || '',
-          card_chart_type: appearanceOptions.card_chart_type || 'bar',
+          display_mode: appearanceOptions.display_mode || 'bar',
           verified: verified,
           turnstile_verified: turnstileVerified,
           show_long_history: sys.show_long_history === 'true'

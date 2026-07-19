@@ -25,12 +25,13 @@
 
         <div class="form-row">
           <div class="form-group flex-1">
-            <label class="form-label">{{ trans.cardChartType }}</label>
-            <select v-model="settings.card_chart_type" class="form-select">
-              <option value="bar">{{ trans.cardChartBar }}</option>
-              <option value="ring">{{ trans.cardChartRing }}</option>
+            <label class="form-label">{{ trans.displayMode }}</label>
+            <select v-model="settings.display_mode" class="form-select">
+              <option value="bar">{{ trans.displayModeBar }}</option>
+              <option value="ring">{{ trans.displayModeRing }}</option>
+              <option value="table">{{ trans.displayModeTable }}</option>
             </select>
-            <p class="text-muted text-sm mt-1">{{ trans.cardChartTypeTip }}</p>
+            <p class="text-muted text-sm mt-1"><span class="warning-icon">[i]</span> {{ trans.displayModeTip }}</p>
           </div>
         </div>
 

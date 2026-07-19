@@ -7,6 +7,7 @@ import { currentLang, translations } from './utils/i18n'
 import { http } from './utils/http'
 import { initConfig, hasMultipleApiBases } from './utils/config'
 import { LAST_AGENT_VERSION, LAST_WORKERS_VERSION, VERSION } from './utils/api'
+import { resolveDisplayMode } from './utils/displayMode'
 import {
   clearTurnstileToken,
   fetchAllTurnstileConfigs,
@@ -32,7 +33,7 @@ async function fetchConfig() {
         turnstile_enabled: false,
         turnstile_login_enabled: false,
         turnstile_site_key: '',
-        card_chart_type: 'bar',
+        display_mode: 'bar',
         version: '',
         last_workers_version: '',
         last_agent_version: '',
@@ -46,7 +47,7 @@ async function fetchConfig() {
         turnstile_enabled: false,
         turnstile_login_enabled: false,
         turnstile_site_key: '',
-        card_chart_type: 'bar',
+        display_mode: 'bar',
         version: '',
         last_workers_version: '',
         last_agent_version: '',
@@ -64,7 +65,7 @@ async function fetchConfig() {
     const isPublic = data.is_public !== false
     const authorization = data.authorization === true
     const siteTitle = data.site_title || ''
-    const cardChartType = data.card_chart_type === 'ring' ? 'ring' : 'bar'
+    const displayMode = resolveDisplayMode(data)
 
     if (version) {
       VERSION.value = version
@@ -83,7 +84,7 @@ async function fetchConfig() {
       is_public: isPublic,
       authorization,
       site_title: siteTitle,
-      card_chart_type: cardChartType
+      display_mode: displayMode
     }
   } catch (e) {
     console.error('Failed to fetch config:', e)
@@ -92,7 +93,7 @@ async function fetchConfig() {
     turnstile_enabled: false,
     turnstile_login_enabled: false,
     turnstile_site_key: '',
-    card_chart_type: 'bar',
+    display_mode: 'bar',
     version: '',
     last_workers_version: '',
     last_agent_version: '',
@@ -237,8 +238,8 @@ async function initApp() {
         is_public: !privateAccess.hasPrivateSite,
         authorization: !privateAccess.hasUnauthorizedPrivateSite,
         site_title: first.data.site_title || '',
-        card_chart_type: first.data.card_chart_type === 'ring' ? 'ring' : 'bar'
-      } : { turnstile_enabled: false, turnstile_login_enabled: false, turnstile_site_key: '', turnstile_api_index: 0, version: '', last_workers_version: '', last_agent_version: '', verified: false, is_public: true, authorization: false, site_title: '', card_chart_type: 'bar' }
+        display_mode: resolveDisplayMode(first.data)
+      } : { turnstile_enabled: false, turnstile_login_enabled: false, turnstile_site_key: '', turnstile_api_index: 0, version: '', last_workers_version: '', last_agent_version: '', verified: false, is_public: true, authorization: false, site_title: '', display_mode: 'bar' }
       if (sharedTurnstileSite) {
         config.turnstile_enabled = true
         config.turnstile_site_key = sharedTurnstileSite.siteKey
@@ -248,7 +249,7 @@ async function initApp() {
       LAST_WORKERS_VERSION.value = config.last_workers_version || ''
       LAST_AGENT_VERSION.value = config.last_agent_version || ''
     } catch (_) {
-      config = { turnstile_enabled: false, turnstile_login_enabled: false, turnstile_site_key: '', turnstile_api_index: 0, version: '', last_workers_version: '', last_agent_version: '', verified: false, is_public: true, authorization: false }
+      config = { turnstile_enabled: false, turnstile_login_enabled: false, turnstile_site_key: '', turnstile_api_index: 0, version: '', last_workers_version: '', last_agent_version: '', verified: false, is_public: true, authorization: false, site_title: '', display_mode: 'bar' }
     }
   } else {
     config = await fetchConfig()

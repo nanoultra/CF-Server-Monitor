@@ -96,7 +96,7 @@ export async function handleServersAPI(request, env, sys) {
       show_expire: sys.show_expire === 'true',
       show_tf: sys.show_tf === 'true',
       show_time: sys.show_time === 'true',
-      card_chart_type: sys.card_chart_type === 'ring' ? 'ring' : 'bar'
+      display_mode: sys.display_mode || 'bar'
     }
   };
 

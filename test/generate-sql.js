@@ -180,7 +180,7 @@ const appearanceOptions = {
   custom_bg: 'https://cdn.nodeimage.com/i/fux0OSoFzVZQsn9uZmSDbIpKzZw2r8GW.webp',
   custom_head: '<meta content="test">',
   custom_script: 'console.log("Hello, World!");',
-  card_chart_type: 'bar'
+  display_mode: 'bar'
 };
 
 const siteOptions = {

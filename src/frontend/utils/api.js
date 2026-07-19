@@ -4,6 +4,7 @@ import { DEFAULT_SITE_TITLE } from './constants'
 import { ref } from 'vue'
 import { normalizeTimestamp } from './time.js'
 import { TIME } from './constants'
+import { resolveDisplayMode } from './displayMode.js'
 
 export { getApiBases, getWsBase }
 
@@ -271,7 +272,7 @@ const createEmptyMergedData = () => ({
     show_expire: true,
     show_tf: true,
     show_time: true,
-    card_chart_type: 'bar',
+    display_mode: 'bar',
     site_title: DEFAULT_SITE_TITLE
   }
 })
@@ -309,7 +310,7 @@ const mergeSiteResult = (mergedData, { data, error, baseUrl }, multiSite, localT
       show_expire: data.sysConfig.show_expire ?? mergedData.sysConfig.show_expire,
       show_tf: data.sysConfig.show_tf ?? mergedData.sysConfig.show_tf,
       show_time: data.sysConfig.show_time ?? mergedData.sysConfig.show_time,
-      card_chart_type: data.sysConfig.card_chart_type ?? mergedData.sysConfig.card_chart_type,
+      display_mode: resolveDisplayMode(data.sysConfig, mergedData.sysConfig.display_mode),
       site_title: multiSite ? localTitle : mergedData.sysConfig.site_title
     }
   }
